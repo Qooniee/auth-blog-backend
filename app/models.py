@@ -3,6 +3,13 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from hashids import Hashids
+from django.core.exceptions import ValidationError
+
+def validate_isbn_length(isbn_value):
+    if len(isbn_value) not in [10, 13]:
+        raise ValidationError(
+            f'ISBN length must be either 10 or 13 characters Got {len(isbn_value)} characters.'
+        )
 
 
 # 投稿モデル DBテーブルをPython Classで定義
@@ -14,7 +21,15 @@ class Post(models.Model):
     image = models.ImageField(
         upload_to="post", verbose_name="サムネイル", null=True, blank=True
     )
-    isbn = models.CharField("isbn", max_length=10, null=False, blank=False, default="None")
+    #isbn = models.CharField("isbn", max_length=10, null=False, blank=False, default="None")
+    isbn = models.CharField(
+        "isbn",
+        max_length=13,
+        null=False,
+        blank=False,
+        default="None",
+        validators=[validate_isbn_length]
+    )
     title = models.CharField("タイトル", max_length=255)
     author = models.CharField("著者", max_length=32,  null=False, blank=False, default="None")
     content = models.TextField("感想")
