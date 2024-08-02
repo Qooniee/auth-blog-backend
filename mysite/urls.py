@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from . import views
 
 """
 includeを使うことで再利用性を高める。アプリごとに独立したURLパターンを
@@ -25,6 +26,7 @@ URLパターンに対応するview関数をマッピング
 """
 
 urlpatterns = [
+    path('', views.index, name='index'),  # これを追加
     # Djoserによる認証のためのURL
     path("api/auth/", include("djoser.urls")),
     #DjoserのJWT認証関連のURL
