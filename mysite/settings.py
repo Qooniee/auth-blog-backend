@@ -17,7 +17,10 @@ DEBUG = env('DEBUG')
 
 
 # 本場環境では、ALLOWED_HOSTSを指定する
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost'])
+
+
+
 
 INSTALLED_APPS = [
     "django.contrib.admin",
