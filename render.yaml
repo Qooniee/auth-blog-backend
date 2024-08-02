@@ -11,7 +11,7 @@ services:
     env: python
     region: singapore
     buildCommand: './build.sh'
-    startCommand: 'gunicorn mysite.wsgi:application --bind 0.0.0.0:80'
+    startCommand: 'gunicorn mysite.wsgi:application --bind 0.0.0.0:10000'
     plan: free
     branch: main
     healthCheckPath: /
@@ -25,4 +25,4 @@ services:
       - key: WEB_CONCURRENCY
         value: 4
     autoDeploy: true
-    port: 80
+    port: 10000
