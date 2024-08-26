@@ -2,7 +2,7 @@ databases:
   - name: auth_blog_django_render_db
     region: singapore
     plan: free
-    databaseName: auth_blog_django_render_db
+    databaseName: auth_blog_django_render_db_z140_gyu2
     user: django_user
 
 services:
